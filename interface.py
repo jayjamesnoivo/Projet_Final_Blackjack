@@ -1,17 +1,12 @@
-def interface(
-        dealer_hand:list, player_hand:list, 
+def display_result(
         dealer_win:bool, player_win:bool,
         score_player:int, score_dealer:int,
         player_bust:bool, dealer_bust:bool,
         player_blackjack:bool, dealer_blackjack:bool,
-    )->bool:
+    ):
     '''
     Diplay the interface/menu for the player
     
-    :param dealer_hand: A list of str with the dealer cards
-    :type dealer_hand: list
-    :param player_hand: A list of str with the player cards
-    :type player_hand: list
     :param dealer_win: If the dealer win
     :type dealer_win: bool
     :param player_win: If the player win
@@ -28,26 +23,7 @@ def interface(
     :type player_blackjack: bool
     :param dealer_blackjack: If the dealer have a score of 21
     :type dealer_blackjack: bool
-    :return: If the player want another card
-    :rtype: bool
     '''
-    FIRST_DEALER_CARD = 0
-    LOGO = """
-            .------.            _     _            _    _            _    
-            |A_  _ |.          | |   | |          | |  (_)          | |   
-            |( \/ ).-----.     | |__ | | __ _  ___| | ___  __ _  ___| | __
-            | \  /|K /\  |     | '_ \| |/ _` |/ __| |/ / |/ _` |/ __| |/ /
-            |  \/ | /  \ |     | |_) | | (_| | (__|   <| | (_| | (__|   < 
-            `-----| \  / |     |_.__/|_|\__,_|\___|_|\_\ |\__,_|\___|_|\__|
-                  |  \/ K|                            _/ |                
-                  `------'                           |__/           
-        """
-
-    print(LOGO)
-    print(f"Dealer's hand: {dealer_hand[FIRST_DEALER_CARD]}")
-    print(f"Your hand: {' , '.join(player_hand)}")
-
-    game_over = True
     if dealer_win:
         print(f"You lost, the dealer won with a score of: {score_dealer}")
     elif player_win:
@@ -60,13 +36,35 @@ def interface(
         print("The dealer busted, you win")
     elif player_bust:
         print("You busted, you lost")
-    else:
-        game_over = False
 
-    if not game_over:
-        while True:
-            reponse_joueur = input("Would you like to draw antoher card (y/n)?")
-            if reponse_joueur == "y":
-                return True
-            elif reponse_joueur == "n":
-                return False
+def want_to_draw()->bool:
+    '''
+    Docstring for want_to_draw
+    
+    :param game_over: If it's a game over
+    :type game_over: bool
+    :return: If the player want another card
+    :rtype: bool
+    '''
+    while True:
+        player_answer = input("Would you like to draw antoher card (y/n)?")
+        if player_answer == "y":
+            return True
+        elif player_answer == "n":
+            return False
+        else:
+            print("Wrong input, try again!")
+
+def display_hands(dealer_hand:list, player_hand:list):
+    '''
+    Docstring for display_hands
+    
+    :param dealer_hand: A list of str with the dealer cards
+    :type dealer_hand: list
+    :param player_hand: A list of str with the player cards
+    :type player_hand: list
+    '''
+    FIRST_DEALER_CARD = 0
+
+    print(f"Dealer's hand: {dealer_hand[FIRST_DEALER_CARD]}")
+    print(f"Your hand: {' , '.join(player_hand)}")
