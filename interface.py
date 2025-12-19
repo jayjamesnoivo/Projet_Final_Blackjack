@@ -20,13 +20,13 @@ def interface(
     :type score_player: int
     :param score_dealer: The actual score of the dealer
     :type score_dealer: bool
-    :param player_bust: Description
+    :param player_bust: If the player have more than 21 score
     :type player_bust: bool
-    :param dealer_bust: Description
+    :param dealer_bust: If the dealer have more than 21 score
     :type dealer_bust: bool
-    :param player_blackjack: Description
+    :param player_blackjack: if the player have a score of 21
     :type player_blackjack: bool
-    :param dealer_blackjack: Description
+    :param dealer_blackjack: If the dealer have a score of 21
     :type dealer_blackjack: bool
     :return: If the player want another card
     :rtype: bool
@@ -47,6 +47,7 @@ def interface(
     print(f"Dealer's hand: {dealer_hand[FIRST_DEALER_CARD]}")
     print(f"Your hand: {' , '.join(player_hand)}")
 
+    game_over = True
     if dealer_win:
         print(f"You lost, the dealer won with a score of: {score_dealer}")
     elif player_win:
@@ -59,10 +60,13 @@ def interface(
         print("The dealer busted, you win")
     elif player_bust:
         print("You busted, you lost")
+    else:
+        game_over = False
 
-    while True:
-        reponse_joueur = input("Would you like to draw antoher card (y/n)?")
-        if reponse_joueur == "y":
-            return True
-        elif reponse_joueur == "n":
-            return False
+    if not game_over:
+        while True:
+            reponse_joueur = input("Would you like to draw antoher card (y/n)?")
+            if reponse_joueur == "y":
+                return True
+            elif reponse_joueur == "n":
+                return False
