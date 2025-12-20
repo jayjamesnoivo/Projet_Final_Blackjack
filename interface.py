@@ -33,9 +33,9 @@ def display_result(
     elif dealer_blackjack:
         print("You lost, the dealer got a blackjack")
     elif dealer_bust:
-        print("The dealer busted, you win")
+        print(f"The dealer busted with a score of {score_dealer}, you win")
     elif player_bust:
-        print("You busted, you lost")
+        print(f"You busted with a score of {score_player}, you lost")
 
 def want_to_draw()->bool:
     '''
@@ -47,15 +47,15 @@ def want_to_draw()->bool:
     :rtype: bool
     '''
     while True:
-        player_answer = input("Would you like to draw antoher card (y/n)?")
+        player_answer = input("Would you like to draw antoher card (y/n)? ")
         if player_answer == "y":
-            return True
-        elif player_answer == "n":
             return False
+        elif player_answer == "n":
+            return True
         else:
             print("Wrong input, try again!")
 
-def display_hands(dealer_hand:list, player_hand:list):
+def display_hands(dealer_hand:list, player_hand:list,game_over:bool):
     '''
     Docstring for display_hands
     
@@ -65,6 +65,8 @@ def display_hands(dealer_hand:list, player_hand:list):
     :type player_hand: list
     '''
     FIRST_DEALER_CARD = 0
-
-    print(f"Dealer's hand: {dealer_hand[FIRST_DEALER_CARD]}")
-    print(f"Your hand: {' , '.join(player_hand)}")
+    if not game_over:
+        print(f"Dealer's hand: {dealer_hand[FIRST_DEALER_CARD]}")
+    else:
+        print(f"Dealer's hand: {dealer_hand}")
+    print(f"Your hand: {player_hand}")
