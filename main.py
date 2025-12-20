@@ -23,7 +23,7 @@ def main():
 
         player_hand.append(deal_cards(deck))
         dealer_hand.append(deal_cards(deck))
-        # player_hand = [10,11,5] Used for test
+        # player_hand = [10,11,5] # Used for test
         dealer_score =  calculate_score(dealer_hand)
         player_score = calculate_score(player_hand)
         
@@ -51,7 +51,7 @@ def main():
 
         if not game_over:
             game_over = want_to_draw()
-            print(game_over)
+            # print(game_over)
         if game_over and not special_result:
             if player_score - 21 > dealer_score - 21:
                 player_win = True

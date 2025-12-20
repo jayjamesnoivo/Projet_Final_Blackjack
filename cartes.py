@@ -5,7 +5,7 @@ def create_deck():
     deck = []
     for v in values:
 
-       deck.append(f"{v}")
+       deck.append(v)
     random.shuffle(deck)
     return deck
 
