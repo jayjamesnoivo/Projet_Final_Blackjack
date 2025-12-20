@@ -9,19 +9,27 @@ def main():
     dealer_score = 0
     game_over = False
     deck = create_deck()
+    dealer_win = False
+    player_win = False
+    player_bust = False
+    dealer_bust = False
+    player_blackjack = False
+    dealer_blackjack = False
 
     while not game_over:
-        while len(player_hand) < 2: # First draw
+        if len(player_hand) < 2: # First draw, each have 2 cards
             player_hand.append(deal_cards(deck))
             dealer_hand.append(deal_cards(deck))
 
+        player_hand.append(deal_cards(deck))
+        dealer_hand.append(deal_cards(deck))
+        # player_hand = [10,11,5] Used for test
         dealer_score =  calculate_score(dealer_hand)
         player_score = calculate_score(player_hand)
-
         
         dealer_result = check_hand_result(dealer_score)
         player_result = check_hand_result(player_score)
-        display_hands(dealer_hand, player_hand)
+        display_hands(dealer_hand, player_hand, game_over)
 
         game_over = True
         
@@ -42,7 +50,8 @@ def main():
             special_result = False
 
         if not game_over:
-            game_over = want_to_draw
+            game_over = want_to_draw()
+            print(game_over)
         if game_over and not special_result:
             if player_score - 21 > dealer_score - 21:
                 player_win = True
@@ -52,11 +61,5 @@ def main():
             display_result(dealer_win, player_win, player_score, dealer_score,
                            player_bust, dealer_bust, player_blackjack,
                            dealer_blackjack)
-            
+            display_hands(dealer_hand, player_hand, game_over)
 main()
-        
-
-        # # test
-        # player_hand = [1, 2,3]
-        # dealer_hand = [10,1,10]
-        # want_to_play = interface()
