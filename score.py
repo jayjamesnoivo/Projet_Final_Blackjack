@@ -14,7 +14,8 @@ def calculate_score(hand:list) -> int:
 
     #Adjust Aces (11 -> 1) if score exceeds 21
     while ACE in hand and score > BLACKJACK:
-        hand[ACE] = 1 
+        index_ace = hand.index (ACE)
+        hand[index_ace] = 1 
         score = sum(hand)
 
     return score
@@ -34,3 +35,4 @@ def check_hand_result(score:int) -> str:
         return "bust"
     else:
         return "normal"
+
